@@ -6,6 +6,7 @@
 
 Parameters:
 { userid: ”something” }
+
 Responses:
 { userid: “something”, msg: “Score is 100”, value: “100” }
 
@@ -13,5 +14,6 @@ Responses:
 
 Parameters:
 { userid: ”something” }
+
 Responses:
 { userid: “something”, msg: “Top 13th Player or Javascript 2% Top Player” }
