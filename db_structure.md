@@ -1,7 +1,6 @@
 ---
-layout: page
-title: Database Sructure
-permalink: /db_structure/
+layout: "page"
+title: "Database Sructure"
 ---
 
 # Database Sructure
