@@ -7,16 +7,16 @@
 Parameters:
 ```
 { 
-    userid: ”something”, 
-    authToken: "token" 
+    user_id: ”something”, 
+    token: "token" // token here must be same as 'badge_app_token' to proceed with request
 }
 ```
 
 Responses:
 ```
 { 
-    userid: “something”, 
-    msg: “Top 13th Player or Javascript 2% Top Player” 
+    user_id: “something”, 
+    badge_text: “Top 13th Player or Javascript 2% Top Player” 
 }
 ```
 
@@ -41,24 +41,33 @@ Anything surounderd in square brakets implies that it will be array of whatever 
 {
     users: [{
       user_id: String // computed when user signs up
-      connected_external_apps: [String] // strings in this array will be the app_id of external apps
+      connected_external_apps: [app_ids] 
       credentials: {
         email: String,
         password: String // will be hashed
       }
-    }]
+    }],
+    external_apps : {
+        'app_id' : {
+            app_name: String,
+            app_url: String,
+            app_icon: String, // url to image
+            token: String, // unique token decided on onboarding
+        }
+    }
 }
 ```
 
 ## External App
 ```
 {
-app_id: String // manually created during onboarding. Must be Unique for each external app.
+app_id: String // manually created during onboarding. Must be Unique for each external app
+badge_app_token: String,
 users: [{
     user_id: String // computed when user signs up
     core_app_id: String // filled out when user signs in with core app's credentials
     data: {
-        ... // app determined
+        ... // depends on app
     }
 }]
 }
