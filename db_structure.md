@@ -1,3 +1,8 @@
+---
+title: Database Sructure
+permalink: /db_structure/
+---
+
 # Database Sructure
 Anything surounderd in square brakets implies that it will be array of whatever is in the square brackets.
 
