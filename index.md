@@ -17,7 +17,8 @@ Parameters:
 ```
 {
     user_email: ”something”,
-    token: "token" // token here must be same as 'badge_app_token' to proceed with request
+    password: "something", would be hashed. Hashed method is yet to be determined
+    token: "token" // token here must be same as 'core_app_token' to proceed with request
 }
 ```
 
@@ -25,14 +26,54 @@ Responses:
 
 ```
 {
-    user_id: “something”,
-    badge_text: “Top 13th Player or Javascript 2% Top Player”
+    success: boolean
 }
 ```
 
 ### POST Login: user/login
 
+Parameters:
+
+```
+{
+    user_email: ”something”,
+    password: "something", would be hashed. Hashed method is yet to be determined
+    token: "token" // token here must be same as 'core_app_token' to proceed with request
+}
+```
+
+Responses:
+
+```
+{
+    success: boolean
+}
+```
+
 ### POST Get Badges: user/get_badges
+
+Parameters:
+
+```
+{
+    user_id: ”something”,
+    token: "token" // token here must be same as 'core_app_token' to proceed with request
+}
+```
+
+Responses:
+
+```
+{
+    badges: [{
+        app_name: String,
+        app_url: String,
+        app_icon: String, // url to image
+        badge_text: String
+    }]
+    token: "token" // de
+}
+```
 
 ## External Applications (HangmanApp, QuizApp, TankGameApp, etc)
 
@@ -64,6 +105,7 @@ Anything surounderd in square brakets implies that it will be array of whatever 
 
 ```
 {
+token: String // used to send authorized reqs to th mangement system
  users: [{
     user_id: String // will be the same user_id from Mangement API,
     user_profile_link: String, // computed on sign-up, first_name + last_name (camelcase)
@@ -90,6 +132,7 @@ Anything surounderd in square brakets implies that it will be array of whatever 
         password: String // will be hashed
       }
     }],
+    core_app_token: String // used to see if requests are from core app
     external_apps : {
         'app_id' : {
             app_name: String,
