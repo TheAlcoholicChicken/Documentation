@@ -18,7 +18,7 @@ Parameters:
 {
     user_email: ”something”,
     password: "something", would be hashed. Hashed method is yet to be determined
-    token: "token" // token here must be same as 'core_app_token' to proceed with request
+    token: "token" // must be an authorized token to proceed with request
 }
 ```
 
@@ -38,8 +38,7 @@ Parameters:
 {
     user_email: ”something”,
     password: "something", would be hashed. Hashed method is yet to be determined
-    token: "token" // token here must be same as 'core_app_token' to proceed with request
-}
+    token: "token" // must be an authorized token to proceed with request
 ```
 
 Responses:
@@ -57,7 +56,7 @@ Parameters:
 ```
 {
     user_id: ”something”,
-    token: "token" // token here must be same as 'core_app_token' to proceed with request
+    token: "token" // must be an authorized token to proceed with request
 }
 ```
 
@@ -71,7 +70,6 @@ Responses:
         app_icon: String, // url to image
         badge_text: String
     }]
-    token: "token" // de
 }
 ```
 
@@ -84,7 +82,7 @@ Parameters:
 ```
 {
     user_id: ”something”,
-    token: "token" // token here must be same as 'badge_app_token' to proceed with request
+    token: "token" // token must match app's token to proceed with request
 }
 ```
 
@@ -105,7 +103,7 @@ Anything surounderd in square brakets implies that it will be array of whatever 
 
 ```
 {
-token: String // used to send authorized reqs to th mangement system
+ token: String // used to send authorized reqs to the mangement system
  users: [{
     user_id: String // will be the same user_id from Mangement API,
     user_profile_link: String, // computed on sign-up, first_name + last_name (camelcase)
@@ -132,15 +130,15 @@ token: String // used to send authorized reqs to th mangement system
         password: String // will be hashed
       }
     }],
-    core_app_token: String // used to see if requests are from core app
     external_apps : {
         'app_id' : {
             app_name: String,
             app_url: String,
             app_icon: String, // url to image
-            token: String, // unique token decided on onboarding
+            token: String, // unique token used to make requests for the external app
         }
-    }
+    },
+    authorized_tokens: [String] // requests with this any token from this list can only make requests
 }
 ```
 
@@ -148,8 +146,7 @@ token: String // used to send authorized reqs to th mangement system
 
 ```
 {
-app_id: String // manually created during onboarding. Must be Unique for each external app
-core_app_token: String,
+token: String, // token assigned by the management system
 users: [{
     user_id: String // computed when user signs up
     core_app_id: String // filled out when user signs in with core app's credentials
@@ -159,3 +156,16 @@ users: [{
 }]
 }
 ```
+
+# Tokens explained
+
+There is 1 unique token for each external app, and the core app.
+
+During onboarding of an external app, a token a generated for that app. That token must be used in each requests to ensure that the request is coming from an authorized source.
+
+The direction a request goes in our architecture.
+![request flow chart]('./assets/img/reqFlowChart.png')
+
+Management Server store all authorized tokens in a list, so whenever a request comes in, the token associated to that request _MUST_ exist in the authorized tokens list, to be able to make a request to the management server.
+
+When then management server makes a request to a purticular external app, it must also include the respective token so the external app can verify it's getting a authorized request from the management server.
