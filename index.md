@@ -95,7 +95,7 @@ Responses:
 }
 ```
 
-# Database Sructure
+# Database Structure
 
 Anything surrounded in square brakets implies that it will be array of whatever is in the square brackets.
 
