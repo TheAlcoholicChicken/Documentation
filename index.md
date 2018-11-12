@@ -164,7 +164,7 @@ There is 1 unique token for each external app, and the core app.
 During onboarding of an external app, a token a generated for that app. That token must be used in each requests to ensure that the request is coming from an authorized source.
 
 The direction a request goes in our architecture.
-![request flow chart]('./assets/img/reqFlowChart.png')
+![request flow chart](https://github.com/TheAlcoholicChicken/Documentation/blob/master/assets/img/reqFlowChart.png?raw=true)
 
 Management Server store all authorized tokens in a list, so whenever a request comes in, the token associated to that request _MUST_ exist in the authorized tokens list, to be able to make a request to the management server.
 
