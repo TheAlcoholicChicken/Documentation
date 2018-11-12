@@ -8,7 +8,7 @@ Parameters:none required
 
 Responses: Dynamically rendered Page
 
-## Mangement System
+## Management System
 
 ### POST Create Account: user/create_account
 
@@ -97,7 +97,7 @@ Responses:
 
 # Database Sructure
 
-Anything surounderd in square brakets implies that it will be array of whatever is in the square brackets.
+Anything surrounded in square brakets implies that it will be array of whatever is in the square brackets.
 
 ## Core App
 
@@ -118,7 +118,7 @@ Anything surounderd in square brakets implies that it will be array of whatever 
 }
 ```
 
-## Mangement System
+## Management System
 
 ```
 {
@@ -168,4 +168,4 @@ The direction a request goes in our architecture.
 
 Management Server store all authorized tokens in a list, so whenever a request comes in, the token associated to that request _MUST_ exist in the authorized tokens list, to be able to make a request to the management server.
 
-When then management server makes a request to a purticular external app, it must also include the respective token so the external app can verify it's getting a authorized request from the management server.
+When then management server makes a request to a particular external app, it must also include the respective token so the external app can verify it's getting a authorized request from the management server.
