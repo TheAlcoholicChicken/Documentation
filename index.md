@@ -101,10 +101,10 @@ Anything surrounded in square brakets implies that it will be array of whatever 
 
 ## Core App
 
+### Users Collection
+
 ```
 {
- token: String // used to send authorized reqs to the mangement system
- users: [{
     user_id: String // will be the same user_id from Mangement API,
     user_profile_link: String, // computed on sign-up, first_name + last_name (camelcase)
     data: {
@@ -113,47 +113,47 @@ Anything surrounded in square brakets implies that it will be array of whatever 
         profile_picture_url: String // hosted on the core app's server
         description: String
     }
- }],
- user_links: [String] // list of strings, to avoid duplicate URLs
 }
 ```
 
 ## Management System
 
+### Users Collection
+```
+
+{
+  user_id: String // computed when user signs up
+  connected_external_apps: [app_ids]
+  credentials: {
+    email: String,
+    password: String // will be hashed
+  }
+}
+```
+### External Apps Collection
 ```
 {
-    users: [{
-      user_id: String // computed when user signs up
-      connected_external_apps: [app_ids]
-      credentials: {
-        email: String,
-        password: String // will be hashed
-      }
-    }],
-    external_apps : {
-        'app_id' : {
-            app_name: String,
-            app_url: String,
-            app_icon: String, // url to image
-            token: String, // unique token used to make requests for the external app
-        }
-    },
-    authorized_tokens: [String] // requests with this any token from this list can only make requests
+    app_name: String,
+    app_url: String,
+    app_icon: String, // url to image
+    token: String, // unique token used to make requests for the external app
 }
 ```
 
-## External App
+### Authorized Tokens Collection
+```
+{ token: String }
+```
 
+## External App
+### Users Collection
 ```
 {
-token: String, // token assigned by the management system
-users: [{
     user_id: String // computed when user signs up
     core_app_id: String // filled out when user signs in with core app's credentials
     data: {
         ... // depends on app
     }
-}]
 }
 ```
 
