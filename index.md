@@ -166,6 +166,59 @@ During onboarding of an external app, a token a generated for that app. That tok
 The direction a request goes in our architecture.
 ![request flow chart](https://github.com/TheAlcoholicChicken/Documentation/blob/master/assets/img/reqFlowChart.png?raw=true)
 
-Management Server store all authorized tokens in a list, so whenever a request comes in, the token associated to that request _MUST_ exist in the authorized tokens list, to be able to make a request to the management server.
+Management Server store all authorized tokens in a collection, so whenever a request comes in, the token associated to that request _MUST_ exist in the authorized tokens list, to be able to make a request to the management server.
 
 When then management server makes a request to a particular external app, it must also include the respective token so the external app can verify it's getting a authorized request from the management server.
+
+# Implemenation for Checking Tokens for each request (Node.js)
+
+There are 2 things needed for thi implemenation. A config.js, and a authentication middleware.
+
+### config.js
+```
+module.exports = {
+    token: proccess.env.AUTH_TOKEN || 'randomlyGeneratedTokenForDevEnv' // auth token
+};
+```
+
+### middlewares.js
+```
+let config = require('config.js');
+
+let auth_token = (req, res, next) {
+    // get token from req
+    let token = req.body.token;
+    
+    if (!token) { 
+        res.status(401).send({ error: "Token Missing" }); 
+    }
+    
+    // checks token, this should use a more reobust method irl, but for the simplicity for this project, this is enough
+    if (token === config.token) {
+        next(); // proceed to actual request
+    } else {
+        res.status(401).send({ error: 'Invalid Token' });
+    }
+}
+
+module.exports = { auth_token }
+```
+
+# Usage
+### routes.js
+```
+  let mds = require('./middlewares.js')
+  
+  app.post('/user/get_badge_message', mds.auth_token, (req, res) => {
+    
+    // ofc perform some DB things here to get data
+    
+    // exmplae response
+    res.status(200).json({
+      userid: '123456',
+      msg: 'Top 13th Player or Javascript 2% Top Player'
+    });
+    
+    res.end();
+  });
+```
