@@ -6,6 +6,8 @@
 
 Parameters:none required
 
+user profile link structure: /user/{user_id}, where {user_id} is unique to each user and the /user/ part is requesting for user info of this {user_id}
+
 Responses: Dynamically rendered Page
 
 ## Management System
