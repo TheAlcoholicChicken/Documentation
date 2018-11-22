@@ -28,7 +28,8 @@ Responses:
 
 ```
 {
-    success: boolean
+    msg: "something",
+    user_id: "something"
 }
 ```
 
@@ -48,7 +49,8 @@ Responses:
 
 ```
 {
-    success: boolean
+    msg: "something",
+    user_id: "something"
 }
 ```
 
