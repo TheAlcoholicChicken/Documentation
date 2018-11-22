@@ -236,6 +236,7 @@ module.exports = { auth_token }
 	"app_name": "App Name",
 	"app_url": "App Url",
 	"app_icon": "App Icon URl" // url to the image file, prefebly hosted on the app's server
+	"auth_token": "token" // token you want the management service to have when it sends requests to YOUR app 
 }
 ```
-3.  the response should be, it will include the token you have to use for any other requests
+3.  the response will include the token you have to use for any other requests
