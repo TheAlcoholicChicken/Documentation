@@ -83,7 +83,7 @@ Parameters:
 
 ```
 {
-    user_id: ”something”,
+    user_email: ”something”,
     token: "token" // token must match app's token to proceed with request
 }
 ```
