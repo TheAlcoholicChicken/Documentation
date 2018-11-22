@@ -38,9 +38,10 @@ Parameters:
 
 ```
 {
-    user_email: ”something”,
+    user_email: "something",
     password: "something", would be hashed. Hashed method is yet to be determined
     token: "token" // must be an authorized token to proceed with request
+}
 ```
 
 Responses:
