@@ -227,3 +227,15 @@ module.exports = { auth_token }
     res.end();
   });
 ```
+
+# Onboard your app
+1. Send a post request to `https://management-system-api.herokuapp.com/admin/add_app_token`
+2. Have the body be:
+```
+{
+	"app_name": "App Name",
+	"app_url": "App Url",
+	"app_icon": "App Icon URl" // url to the image file, prefebly hosted on the app's server
+}
+```
+3.  the response should be, it will include the token you have to use for any other requests
